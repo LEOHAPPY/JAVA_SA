@@ -1,15 +1,24 @@
 package workshop;
 
+import javax.swing.plaf.synth.SynthStyle;
+
 public class Person {
-	private String surName;
-	private String firstName;
-	private String secondName;
+	protected String surName;
+	protected String firstName;
+	protected String secondName;
 	
 	public Person(String surName, String firstName, String secondName)
 	{
 		this.surName = surName;
 		this.firstName = firstName;
 		this.secondName = secondName;
+	}
+	//any shotcut to overloading?
+	public Person(String surName, String firstName) 
+	{
+//		this.surName = surName;
+//		this.firstName = firstName;
+		this(surName,firstName,null);
 	}
 	
 	public String getSurName()
@@ -29,14 +38,19 @@ public class Person {
 	
 	public void show()
 	{
+		System.out.println(this);
+		
+	}
+	
+	public String toString(){
+		String fullName;
 		if(secondName == null)
 		{
-			System.out.println(firstName +" "+surName);
+			fullName = firstName +" "+surName;
 		}
 		else
-			System.out.println(firstName +" " + secondName + " "+ surName);
-	
-		
+			fullName = firstName +" " + secondName + " "+ surName;
+		return fullName;
 	}
 	
 	

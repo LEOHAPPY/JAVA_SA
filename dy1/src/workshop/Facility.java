@@ -24,11 +24,17 @@ public class Facility {
 	}
 	
 	public void show(){
+		System.out.println(this);
+	}
+	
+	public String toString(){
+		String output = "";
 		if (description ==null){
-			System.out.println(name);
+			output = name;
 		}
 		else 
-			System.out.print(name +"(" + description +")");
+			output = name +"(" + description +")";
+		return output;
 	}
 	
 }
