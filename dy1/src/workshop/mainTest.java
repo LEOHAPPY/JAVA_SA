@@ -1,0 +1,14 @@
+package workshop;
+
+public class mainTest {
+
+	public mainTest() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
