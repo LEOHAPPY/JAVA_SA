@@ -1,5 +1,7 @@
 package workshop;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ClubApplication {
@@ -19,8 +21,9 @@ public class ClubApplication {
 	public ClubApplication() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public static void main(String[] args) {
+	
+	
+	public static void main(String[] args) throws BadBookingException, ParseException {
 		
 //		Person leo = new Person("lisu","chao","");
 //		Person leo1 = new Person("leo", "chao");
@@ -54,13 +57,24 @@ public class ClubApplication {
 		c.showFacilities();
 		System.out.println("\n");
 		
-		Booking b1 = new Booking(m1, f1, new Date(2016,11,12), new Date(2016,11,20));
-		Booking b2 = new Booking(m2, f1, new Date(2016,11,19), new Date(2016,12,1));
+		SimpleDateFormat dateFormat=new SimpleDateFormat("d-MMM-yyyy H:mm");
+		Booking booking=new Booking(m1,f1,dateFormat.parse("23-Nov-2016 16:00"),dateFormat.parse("30-Nov-2016 16:00")); 
+		System.out.println(booking);
 		
-	    b2.overlap(b1);
-	    
-	    System.out.println(b1);
-	    System.out.println(b2);
+		Booking b1,b2;
+		try {
+			b1 = new Booking(m1, f1, dateFormat.parse("10-Nov-2016 16:00"),dateFormat.parse("20-Nov-2016 16:00"));
+			b2 = new Booking(m2, f1, dateFormat.parse("23-Nov-2016 16:00"),dateFormat.parse("30-Nov-2016 16:00"));
+		    b2.overlap(b1);
+		    
+		    System.out.println(b1);
+		    System.out.println(b2);
+		} catch (BadBookingException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+
 		
 	}
 
