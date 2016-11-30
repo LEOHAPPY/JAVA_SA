@@ -1,0 +1,8 @@
+INDEX VERSION 1.129+L:\Suria\SA43\Workspace\JavaEEWorkspace\.metadata\.plugins\org.eclipse.jdt.core
+356324311.index
+287966506.index
+1294334580.index
+1568714543.index
+6414640.index
+1120862273.index
+888604954.index

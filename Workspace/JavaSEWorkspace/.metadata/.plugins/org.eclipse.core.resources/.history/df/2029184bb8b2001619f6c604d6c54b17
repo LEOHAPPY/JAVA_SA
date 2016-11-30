@@ -1,0 +1,111 @@
+package crud;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Student;
+
+public class StudentCRUD {
+	private static Connection connection;
+	private static Statement statement;
+	private ResultSet rs;
+
+	private static void openConnection() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/demo", "root", "password");
+			statement = connection.createStatement();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static void closeConnection() {
+		try {
+			statement.close();
+
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	public int createStudent(Student s) throws SQLException {
+		openConnection();
+		String ins = "INSERT INTO demo.student(matric, name, nick, dob, fee) VALUES ("
+				+ s.getMatricNumber()
+				+ ", \""
+				+ s.getName()
+				+ "\",\""
+				+ s.getNickName()
+				+ "\"," + s.getDob() + ",\"" + s.getFee() + "\");";
+		int result = statement.executeUpdate(ins);
+		closeConnection();
+		return result;
+
+	}
+
+	public Student getOneStudent(int id) throws SQLException {
+		Student s = new Student();
+		openConnection();
+		rs = statement.executeQuery("SELECT * FROM demo.student WHERE id ="
+				+ id + ";");
+		while (rs.next()) {
+			s = new Student(rs.getString(1), rs.getString("name"), new java.util.Date(rs.getDate("dob").getDate()),
+					rs.getString("nick"),  rs.getDouble("fee"));
+		}
+		closeConnection();
+		return s;
+
+	}
+
+	public ArrayList<Student> getAllStudents() throws SQLException {
+		openConnection();
+		ArrayList<Student> result = new ArrayList<Student>();
+		rs = statement.executeQuery("SELECT * FROM demo.student;");
+		while (rs.next()) {
+			Student s = new Student(rs.getString("matric"), rs.getString("name"), new java.util.Date(rs.getDate("dob").getDate()),
+					rs.getString("nick"),  rs.getDouble("fee"));
+			result.add(s);
+		}
+		closeConnection();
+		return result;
+	}
+
+	public int updateStudent(Student s) throws SQLException {
+		openConnection();
+		java.sql.Date sqlDate = new java.sql.Date(s.getDob().getTime());
+		String upd = "UPDATE demo.student SET matric = " + s.getMatricNumber()
+				+ ", name = \"" + s.getName() + "\", nick =\"" + s.getNickName()
+				+ "\", fee =" + s.getFee() + ", dob = \"" + sqlDate
+				+ "\" where matric = " + s.getMatricNumber() + ";";
+		int result = statement.executeUpdate(upd);
+		closeConnection();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.StudentDAO#deleteStudent(model.Student)
+	 */
+	@Override
+	public boolean deleteStudent(Student s) throws SQLException {
+		openConnection();
+		String del = "DELETE FROM demo.student WHERE id = " + s.getId() + ";";
+		boolean result = statement.execute(del);
+		closeConnection();
+		return result;
+
+	}
+
+}

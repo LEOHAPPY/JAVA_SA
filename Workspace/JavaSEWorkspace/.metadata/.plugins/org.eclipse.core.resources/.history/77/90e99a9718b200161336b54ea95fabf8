@@ -1,0 +1,18 @@
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class StudentJDBC {
+
+	public static void main(String[] args) throws ClassNotFoundException {
+		// TODO Auto-generated method stub
+		
+		//1. Driver
+		
+		  Class.forName("com.mysql.jdbc.Driver");
+		// 2. Connection
+		  Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","password");
+	}
+
+}

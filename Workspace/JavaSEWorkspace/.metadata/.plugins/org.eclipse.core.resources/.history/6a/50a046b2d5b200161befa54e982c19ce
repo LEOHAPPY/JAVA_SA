@@ -1,0 +1,40 @@
+package test;
+
+import java.util.ArrayList;
+
+import dao.DAOFactory;
+import dao.MovieDAO;
+import dao.mysql.MovieDAOImpl;
+import dto.MovieDTO;
+import exception.MyDataException;
+
+public class TestDAO {
+
+	public static void main(String[] args) {
+
+		//MovieDAOImpl dao = new MovieDAOImpl();
+		
+	    MovieDAO dao = DAOFactory.getMovieDAOInstance();
+		ArrayList<MovieDTO> rlist;
+		try {
+			rlist = dao.findAllMovies();
+
+			for (MovieDTO movieDTO : rlist) {
+				System.out.println(movieDTO.toString());
+			}
+			MovieDTO m = new MovieDTO(6,null,"LOL",0);
+		    int result = dao.updateMovie(m);
+		    System.out.println(result);
+		    rlist = dao.findAllMovies();
+
+			for (MovieDTO movieDTO : rlist) {
+				System.out.println(movieDTO.toString());
+			}
+		} catch (MyDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}

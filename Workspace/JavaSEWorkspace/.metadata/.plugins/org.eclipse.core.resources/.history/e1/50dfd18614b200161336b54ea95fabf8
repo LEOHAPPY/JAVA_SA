@@ -1,0 +1,7 @@
+CREATE TABLE `test`.`student` (
+  `matric` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `nick` VARCHAR(45) NULL,
+  `dob` DATE NULL,
+  `fee` DECIMAL NULL,
+  PRIMARY KEY (`matric`));

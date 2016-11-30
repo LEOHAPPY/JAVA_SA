@@ -1,0 +1,14 @@
+package jdbc;
+
+public class StudentJDBC {
+
+	public static void main(String[] args) throws ClassNotFoundException {
+		// TODO Auto-generated method stub
+		
+		//1. Driver
+		
+		  Class.forName("com.mysql.jdbc.Driver");
+		
+	}
+
+}

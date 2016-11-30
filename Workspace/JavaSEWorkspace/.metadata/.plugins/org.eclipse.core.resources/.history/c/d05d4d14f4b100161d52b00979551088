@@ -1,0 +1,14 @@
+package test;
+
+import model.Student;
+
+public class TestStudent {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+     Student s1 = new Student("LIN SIYIN", "SA43-01", null, "pleasant lady", 0.0);
+
+	}
+
+}

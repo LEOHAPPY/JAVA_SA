@@ -1,0 +1,16 @@
+package model;
+
+import java.util.Date;
+
+public class Student {
+	
+	private String name;
+	private String matricNumber;
+	private Date dob;
+	private String nickName;
+	private double fee;
+	
+	
+	
+
+}

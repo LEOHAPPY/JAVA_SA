@@ -1,0 +1,12 @@
+package test;
+
+import crud.StudentCRUD;
+
+public class TestCRUDStudent {
+
+	public static void main(String[] args) {
+		StudentCRUD scrud = new StudentCRUD();
+
+	}
+
+}

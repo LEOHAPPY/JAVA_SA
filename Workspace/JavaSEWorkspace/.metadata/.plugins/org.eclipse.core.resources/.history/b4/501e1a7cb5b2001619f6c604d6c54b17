@@ -1,0 +1,125 @@
+package crud;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Student;
+
+public class StudentCRUD {
+	private static Connection connection;
+	private static Statement statement;
+	private ResultSet rs;
+
+	private static void openConnection() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/demo", "root", "password");
+			statement = connection.createStatement();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static void closeConnection() {
+		try {
+			statement.close();
+
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.StudentDAO#createStudent(model.Student)
+	 */
+	@Override
+	public int createStudent(Student s) throws SQLException {
+		openConnection();
+		String ins = "INSERT INTO demo.student(id, name, nick, fee, grade) VALUES ("
+				+ s.getId()
+				+ ", \""
+				+ s.getName()
+				+ "\",\""
+				+ s.getNick()
+				+ "\"," + s.getFee() + ",\"" + s.getGrade() + "\");";
+		int result = statement.executeUpdate(ins);
+		closeConnection();
+		return result;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.StudentDAO#getOneStudent(int)
+	 */
+	@Override
+	public Student getOneStudent(int id) throws SQLException {
+		Student s = new Student();
+		openConnection();
+		rs = statement.executeQuery("SELECT * FROM demo.student WHERE id ="
+				+ id + ";");
+		while (rs.next()) {
+			s = new Student(rs.getInt(1), rs.getString("name"),
+					rs.getString("nick"), rs.getDouble("fee"), rs.getString(5));
+		}
+		closeConnection();
+		return s;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.StudentDAO#getAllStudents()
+	 */
+	@Override
+	public ArrayList<Student> getAllStudents() throws SQLException {
+		openConnection();
+		ArrayList<Student> result = new ArrayList<Student>();
+		rs = statement.executeQuery("SELECT * FROM demo.student;");
+		while (rs.next()) {
+			Student s = new Student(rs.getInt(1), rs.getString("name"),
+					rs.getString("nick"), rs.getDouble("fee"), rs.getString(5));
+			result.add(s);
+		}
+		closeConnection();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.StudentDAO#updateStudent(model.Student)
+	 */
+	@Override
+	public int updateStudent(Student s) throws SQLException {
+		openConnection();
+		String upd = "UPDATE demo.student SET id = " + +s.getId()
+				+ ", name = \"" + s.getName() + "\", nick =\"" + s.getNick()
+				+ "\", fee =" + s.getFee() + ", grade = \"" + s.getGrade()
+				+ "\" where id = " + s.getId() + ";";
+		int result = statement.executeUpdate(upd);
+		closeConnection();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.StudentDAO#deleteStudent(model.Student)
+	 */
+	@Override
+	public boolean deleteStudent(Student s) throws SQLException {
+		openConnection();
+		String del = "DELETE FROM demo.student WHERE id = " + s.getId() + ";";
+		boolean result = statement.execute(del);
+		closeConnection();
+		return result;
+
+	}
+
+}

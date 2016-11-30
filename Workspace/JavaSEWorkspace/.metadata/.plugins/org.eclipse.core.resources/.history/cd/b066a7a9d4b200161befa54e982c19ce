@@ -1,0 +1,16 @@
+package dao;
+
+import java.util.ArrayList;
+
+import dto.MovieDTO;
+import exception.MyDataException;
+
+public interface MovieDAO {
+	
+	public ArrayList<MovieDTO> findAllMovies() throws MyDataException;
+	public int updateMovie(MovieDTO m) throws MyDataException;
+	
+	// updateMovie(int id, String name, String heroname, double ratting)
+	// deleteMovie(int id);
+
+}

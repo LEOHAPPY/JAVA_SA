@@ -1,0 +1,17 @@
+package test;
+
+import java.util.ArrayList;
+
+import crud.StudentCRUD;
+import model.Student;
+
+public class TestCRUDStudent {
+
+	public static void main(String[] args) {
+		StudentCRUD scrud = new StudentCRUD();
+		ArrayList<Student> slist = scrud.getAllStudents();
+		
+
+	}
+
+}

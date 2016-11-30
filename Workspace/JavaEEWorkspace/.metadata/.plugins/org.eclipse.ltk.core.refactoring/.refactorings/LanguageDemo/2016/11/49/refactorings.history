@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Messages_hi.properties&apos; to &apos;Messages_hi.properties&apos;&#x0D;&#x0A;- Original project: &apos;LanguageDemo&apos;&#x0D;&#x0A;- Destination element: &apos;Messages_hi.properties&apos;&#x0D;&#x0A;- Original element: &apos;Messages_hi.properties&apos;" description="Copy file" element1="src/Messages_hi.properties" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1480490430497" target="/LanguageDemo/src/Messages_hi.properties" units="0" version="1.0"/>
+</session>
